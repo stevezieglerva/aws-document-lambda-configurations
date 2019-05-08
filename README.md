@@ -17,10 +17,6 @@ python document_lambdas.py
 
 Console:
 ```
-
-C:\Users\18589\Dropbox\AWS\aws-document-lambda-configurations>Scripts\activate
-
-(aws-document-lambda-configurations) C:\Users\18589\Dropbox\AWS\aws-document-lambda-configurations>python document_lambdas.py
 Getting lambda data ...
 Getting lambda event sources ...
 Getting S3 sources ...
