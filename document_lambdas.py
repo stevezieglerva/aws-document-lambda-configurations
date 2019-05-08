@@ -133,6 +133,11 @@ def write_csv():
 	print("Getting S3 sources ...")
 	s3_notifications = get_s3_event_notifications()
 
+	sample_function_json = functions[0]
+	fieldnames = create_ordered_fieldname_list(sample_function_json)
+
+	function_details = create_enhanced_lambda_list(sample_function_json, functions, event_sources, s3_notifications)
+
 
 	with open("lambda_data.csv", "w", newline="") as csvfile:
 		sample_function_json = functions[0]

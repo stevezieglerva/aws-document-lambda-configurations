@@ -62,12 +62,17 @@ class Tests(unittest.TestCase):
 		lambda_basics = get_basic_lambda_data()
 		event_sources = get_lambda_event_source_mappings()
 		s3_notifications = get_s3_event_notifications()
+		sample_function_json = lambda_basics[0]
+		fieldnames = create_ordered_fieldname_list(sample_function_json)
 
 		# Act
-		results = create_enhanced_lambda_list(lambda_basics, event_sources, s3_notifications)
+		results = create_enhanced_lambda_list(fieldnames, lambda_basics, event_sources, s3_notifications)
 
 		# Assert
 		self.assertTrue(len(results) > 0)
+		first_key = next(iter(results))
+		first_item = results[first_key]
+		self.assertTrue("Event" in first_item)
 
 if __name__ == '__main__':
 	unittest.main()	
