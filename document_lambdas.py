@@ -5,44 +5,6 @@ import pysnooper
 
 
 
-test = {
-    "LambdaFunctionConfigurations": [
-        {
-            "Id": "a452521e-0cfc-46a7-8e46-aef266f37406",
-            "Events": [
-                "s3:ObjectCreated:*"
-            ],
-            "Filter": {
-                "Key": {
-                    "FilterRules": [
-                        {
-                            "Name": "Prefix",
-                            "Value": "prep-output"
-                        }
-                    ]
-                }
-            },
-            "LambdaFunctionArn": "arn:aws:lambda:us-east-1:112280397275:function:aws-code-index-format-files"
-        },
-        {
-            "Id": "555f4c3e-ba7b-4e6f-9884-71e1c797ff8f",
-            "Events": [
-                "s3:ObjectCreated:*"
-            ],
-            "Filter": {
-                "Key": {
-                    "FilterRules": [
-                        {
-                            "Name": "Prefix",
-                            "Value": "es-bulk-files-input/2"
-                        }
-                    ]
-                }
-            },
-            "LambdaFunctionArn": "arn:aws:lambda:us-east-1:112280397275:function:aws-read-s3-es-events-in-chunks-s2"
-        }]
-}
-
 
 def get_basic_lambda_data():
 	boto_lamda = boto3.client("lambda")
