@@ -147,7 +147,6 @@ class Tests(unittest.TestCase):
 
 		# Act
 		results = get_s3_event_notifications()
-		print(json.dumps(results,indent=3))
 
 		# Assert
 		self.assertTrue(len(results) > 0)
@@ -171,7 +170,7 @@ class Tests(unittest.TestCase):
 		self.assertEqual(results[1], "Description")
 		self.assertTrue("Event" in results)
 
-	@pysnooper.snoop(depth=2)
+
 	def test_create_enhanced_lambda_list__valid_inputs__merged_dictionary_returned(self):
 		# Arrange
 		lambda_basics = LAMBDAS_JSON
@@ -182,7 +181,6 @@ class Tests(unittest.TestCase):
 
 		# Act
 		results = create_enhanced_lambda_list(fieldnames, lambda_basics, event_sources, s3_notifications)
-		print(json.dumps(results, indent=3))
 
 		# Assert
 		self.assertTrue(len(results) > 0)
