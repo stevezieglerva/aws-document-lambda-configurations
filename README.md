@@ -30,12 +30,14 @@ Console:
 Getting lambda data ...
 Getting lambda event sources ...
 Getting S3 sources ...
-BingSpellcheck                          <-
-BlogBuild                               <-
-aws-code-index-bulk-load                <- arn:aws:sqs:us-east-1:xxx:code-index
-aws-code-index-escape-files             <- s3:code-index-3
-aws-code-index-format-files             <- s3:code-index-3
-aws-code-index-stream-bulk-load         <- arn:aws:dynamodb:us-east-1:xxx:table/code-index/stream/2018-12-16T17:13:15.772
+Getting Cloudwatch logs ...
+
+Function Name                       Last Run                     Last Modified                Event
+-----------                         -----------                  -----------                  -----------
+BingSpellcheck                      2018-10-07T12:56:12.908999   2018-03-27T17:02:50.315+0000
+aws-code-index-bulk-load            2018-12-16T00:30:05.341000   2018-12-15T19:44:51.867+0000 arn:aws:sqs:us-east-1:112:code-index
+aws-code-index-escape-files         2019-02-04T17:25:37.974999   2019-01-22T18:26:11.033+0000 s3:code-index-3
+aws-dynamodb-to-es-bulk             2018-12-30T09:31:34.119999   2018-12-27T15:00:35.570+0000 arn:aws:dynamodb:us-east-1:112:table/elasticsearch-queue/stream/2018-12-27T13:13:11.209
 ```
 
 lambda_data.csv:

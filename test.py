@@ -2,6 +2,7 @@ from document_lambdas import *
 import unittest
 import boto3
 import pysnooper
+from dateutil.parser import parse
 
 LAMBDAS_JSON =      [
 		{
@@ -115,6 +116,10 @@ S3_NOTIFICATIONS =  {
    }
 }
 
+CLOUDWATCH_LOGS ={"lambda_example_s3" : "2019-01-22T13:58:10.710000", 
+				"lambda_example_dynamo" : "2019-01-22T13:58:10.710000", 
+				"lambda_example_sqs" : "2019-01-22T13:58:10.710000"
+}
 
 
 class Tests(unittest.TestCase):
@@ -154,6 +159,7 @@ class Tests(unittest.TestCase):
 		first_item = results[first_key]
 		self.assertTrue("LambdaFunctionArn" in first_item)
 
+
 	def test_get_cloudwatch_last_events__valid_aws_account_info__expected_json_returned_from_AWS(self):
 		# Arrange
 
@@ -161,8 +167,19 @@ class Tests(unittest.TestCase):
 		results = get_cloudwatch_last_events(["aws-code-index-format-files", "aws-s3-to-es"])
 
 		# Assert
-		self.assertGreater(results["aws-code-index-format-files"]["epoch_ms"], 0)
-		self.assertGreater(results["aws-s3-to-es"]["epoch_ms"], 0)
+		date = results["aws-code-index-format-files"]
+		parse(date)
+		try:
+			parse(date)
+		except Exception as e:
+			self.fail("{} is not a valid date".format(date))
+
+		date = results["aws-s3-to-es"]
+		parse(date)
+		try:
+			parse(date)
+		except Exception as e:
+			self.fail("{} is not a valid date".format(date))
 
 
 
@@ -187,16 +204,18 @@ class Tests(unittest.TestCase):
 		lambda_basics = LAMBDAS_JSON
 		event_sources = EVENT_SOURCE_MAPPINGS
 		s3_notifications = S3_NOTIFICATIONS
+		cw_logs = CLOUDWATCH_LOGS
 		sample_function_json = lambda_basics[0]
 		fieldnames = create_ordered_fieldname_list(sample_function_json)
 
 		# Act
-		results = create_enhanced_lambda_list(fieldnames, lambda_basics, event_sources, s3_notifications)
+		results = create_enhanced_lambda_list(fieldnames, lambda_basics, event_sources, s3_notifications, cw_logs)
 
 		# Assert
 		self.assertTrue(len(results) > 0)
 		self.assertEqual(results["lambda_example_dynamo"]["Event"], "arn:aws:dynamodb:us-east-1:115:table/lnkchk-queue/stream/2018-06-17T02:35:39.488")
 		self.assertEqual(results["lambda_example_s3"]["Event"], "s3:code-index")
+		self.assertEqual(results["lambda_example_s3"]["LastEvent"], "2019-01-22T13:58:10.710000")
 
 if __name__ == '__main__':
 	unittest.main()	
