@@ -161,8 +161,8 @@ class Tests(unittest.TestCase):
 		results = get_cloudwatch_last_events(["aws-code-index-format-files", "aws-s3-to-es"])
 
 		# Assert
-		self.assertGreater(results["aws-code-index-format-files"], 0)
-		self.assertGreater(results["aws-s3-to-es"], 0)
+		self.assertGreater(results["aws-code-index-format-files"]["epoch_ms"], 0)
+		self.assertGreater(results["aws-s3-to-es"]["epoch_ms"], 0)
 
 
 

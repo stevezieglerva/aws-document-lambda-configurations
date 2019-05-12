@@ -2,6 +2,7 @@ import boto3
 import json
 import csv
 import pysnooper
+import datetime
 
 
 
@@ -43,8 +44,10 @@ def get_cloudwatch_last_events(lambda_function_names):
 	for function in lambda_function_names:
 		log_group = "/aws/lambda/" + function
 		log_stream_results = logs.describe_log_streams(logGroupName=log_group, orderBy="LastEventTime", limit=1, descending=True)
-		last_event = log_stream_results["logStreams"][0]["lastEventTimestamp"]
-		cw_results[function] = last_event
+		last_event_epoch = log_stream_results["logStreams"][0]["lastEventTimestamp"]
+		last_event_str = datetime.datetime.fromtimestamp(last_event_epoch/1000).strftime('%Y-%m-%d %H:%M:%S.%f')
+		details = {"epoch_ms" : last_event_epoch, "date" : last_event_str}
+		cw_results[function] = details
 	return cw_results
 
 
