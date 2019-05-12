@@ -69,7 +69,7 @@ def create_ordered_fieldname_list(lambda_function_json):
 		fieldnames.append(fieldname)
 	return fieldnames
 
-#@pysnooper.snoop()
+
 def create_enhanced_lambda_list(fieldnames, functions, event_sources, s3_notifications, cloudwatch_logs):
 	function_details = {}
 	for function in functions:
