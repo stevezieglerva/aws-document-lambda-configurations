@@ -134,7 +134,6 @@ def main():
 
 	with open("lambda_data.csv", "w", newline="") as csvfile:
 		sample_function_json = functions[0]
-		fieldnames = create_ordered_fieldname_list(sample_function_json)	
 		writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
 		writer.writeheader()
 		for function_name in function_details:
