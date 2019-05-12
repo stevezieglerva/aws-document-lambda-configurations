@@ -8,6 +8,9 @@ phases:
   build:
     commands:
       - echo "******** Testing ********"
+      - python test.py
+
+      
  
 
 
