@@ -50,7 +50,7 @@ There are a few unittest tests defined to confirm the AWS API output and process
 python test.py
 
 ----------------------------------------------------------------------
-Ran 5 tests in 16.005s
+Ran 6 tests in 9.344s
 
 OK
 ```

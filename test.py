@@ -215,7 +215,7 @@ class Tests(unittest.TestCase):
 		self.assertTrue(len(results) > 0)
 		self.assertEqual(results["lambda_example_dynamo"]["Event"], "arn:aws:dynamodb:us-east-1:115:table/lnkchk-queue/stream/2018-06-17T02:35:39.488")
 		self.assertEqual(results["lambda_example_s3"]["Event"], "s3:code-index")
-		self.assertEqual(results["lambda_example_s3"]["LastEvent"], "2019-01-22T13:58:10.710000")
+		self.assertEqual(results["lambda_example_s3"]["LastRun"], "2019-01-22T13:58:10.710000")
 
 if __name__ == '__main__':
 	unittest.main()	
