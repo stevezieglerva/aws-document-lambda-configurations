@@ -41,6 +41,7 @@ aws-dynamodb-to-es-bulk             2018-12-30T09:31:34.119999   2018-12-27T15:0
 ```
 
 lambda_data.csv:
+
 A CSV file is also created with all of the detailed columns. This is useful for sorting and filtering.
 
 ## Tests
