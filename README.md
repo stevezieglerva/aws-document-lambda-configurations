@@ -55,3 +55,6 @@ Ran 6 tests in 9.344s
 
 OK
 ```
+
+## TODO
+Add support for Lambdas started by CloudWatch events
