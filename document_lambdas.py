@@ -36,6 +36,19 @@ def get_s3_event_notifications():
 				s3_notifications[lambda_arn] = notification
 	return s3_notifications
 
+@pysnooper.snoop()
+def get_cloudwatch_last_events(lambda_function_names):
+	logs = boto3.client("logs")
+	cw_results = {}
+	for function in lambda_function_names:
+		log_group = "/aws/lambda/" + function
+		log_stream_results = logs.describe_log_streams(logGroupName=log_group, orderBy="LastEventTime", limit=1, descending=True)
+		last_event = log_stream_results["logStreams"][0]["lastEventTimestamp"]
+		cw_results[function] = last_event
+	return cw_results
+
+
+
 
 def create_ordered_fieldname_list(lambda_function_json):
 	first_field_names = ["FunctionName", "Description"]
